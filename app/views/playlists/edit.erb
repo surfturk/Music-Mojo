@@ -1,0 +1,10 @@
+<h1>Edit playlist here!</h1>
+
+<form action="/playlist/#{@playlist.id}" method="post">
+  <input id="hidden" type="hidden"name="_method" value="patch">
+  Playlist Name: <input type=text value="<%=@playlist.playlist_name%>" name="playlist_name">
+  Genre: <input type=text value="<%=@playlist.genre%>" name="genre">
+  Artist: <input type=text value="<%=@playlist.artist%>" name="artist">
+  Song: <input type=text value="<%=@playlist.song%>" name="song">
+  <input type=submit>
+<form>
