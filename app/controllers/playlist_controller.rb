@@ -4,47 +4,62 @@ class PlaylistController < ApplicationController
         erb :'/playlists/new'
        end
        
-       post '/playlists' do
-         @playlist = Playlist.create(
+       post '/playlists/new' do
+         @playlist = current_user.playlists.build(
            playlist_name: params[:playlist_name], 
            genre: params[:genre], 
            artist: params[:artist], 
            song: params[:song])
-        redirect "/playlists/#{@playlist.id}"
+           @playlist.save
+        erb :"/playlists/show"
+          #  else
+          #   redirect "/error"
+          # end  
        end   
        
+       get '/playlists/show' do
+        @playlist =  Playlist.find_by(params[:id])
+         erb :'/playlists/show'
+       end
        
        get '/playlists/:id' do
           @playlist = Playlist.find(params[:id])
+          if @playlist.user == current_user
           erb :'/playlists/show'
+          else
+            redirect :'/playlists'
        end   
+      end
        
        get '/playlists' do
-         @playlist = Playlist.all
+        
+         @playlist = current_user.playlists.all
+        #  @current_user = current_user.playlist
          erb :'/playlists/index'
-       end    
+       end  
+       
        
        
        get '/playlists/:id/edit' do
+        if playlist.user == current_user
          @playlist = Playlist.find(params[:id])
          erb :'/playlists/edit'
        end
+      end 
        
-       
-       post '/playlists/:id' do
-           @playlist = Playlist.find(params[:id])
-           @playlist.update(
+       patch '/playlists/:id' do
+           @playlist = Playlist.find_by(params[:id]).update(
            playlist_name: params[:playlist_name], 
            genre: params[:genre], 
            artist: params[:artist], 
            song: params[:song])
-           redirect "/playlists/#{@playlist.id}"
+           redirect to "/playlists/show"
        end    
        
        
        delete '/playlists/:id' do
            @playlist = Playlist.find(params[:id])
-           @playlist.destroy_all
+           @playlist.destroy
            redirect "/playlists"
            
        end   
