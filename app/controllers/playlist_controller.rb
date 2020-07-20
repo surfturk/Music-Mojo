@@ -12,9 +12,6 @@ class PlaylistController < ApplicationController
            song: params[:song])
            @playlist.save
         erb :"/playlists/show"
-          #  else
-          #   redirect "/error"
-          # end  
        end   
        
        get '/playlists/show' do
@@ -33,7 +30,6 @@ class PlaylistController < ApplicationController
        
        get '/playlists' do
          @playlist = current_user.playlists.all
-        #  @current_user = current_user.playlist
          erb :'/playlists/index'
        end  
     
@@ -54,14 +50,14 @@ class PlaylistController < ApplicationController
            genre: params[:genre], 
            artist: params[:artist], 
            song: params[:song])
-           redirect to "/playlists/show"
+           redirect to :"/playlists/show"
        end    
        
        
        delete '/playlists/:id' do
            @playlist = Playlist.find(params[:id])
            @playlist.destroy
-           redirect "/playlists"
+           redirect :"/playlists"
            
        end   
 
