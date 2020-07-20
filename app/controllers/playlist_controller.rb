@@ -5,7 +5,7 @@ class PlaylistController < ApplicationController
        end
        
        post '/playlists/new' do
-         @playlist = current_user.playlists.build(
+         @playlist = current_user.playlists.create!(
            playlist_name: params[:playlist_name], 
            genre: params[:genre], 
            artist: params[:artist], 
@@ -32,19 +32,20 @@ class PlaylistController < ApplicationController
       end
        
        get '/playlists' do
-        
          @playlist = current_user.playlists.all
         #  @current_user = current_user.playlist
          erb :'/playlists/index'
        end  
-       
+    
        
        
        get '/playlists/:id/edit' do
-        if playlist.user == current_user
+           if current_user
          @playlist = Playlist.find(params[:id])
          erb :'/playlists/edit'
-       end
+           else
+           redirect :"/" 
+           end
       end 
        
        patch '/playlists/:id' do
