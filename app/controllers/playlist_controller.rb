@@ -49,7 +49,7 @@ class PlaylistController < ApplicationController
       end 
        
        patch '/playlists/:id' do
-           @playlist = Playlist.find_by(params[:id]).update(
+           @playlist = Playlist.find_by(params[:id]).update!(
            playlist_name: params[:playlist_name], 
            genre: params[:genre], 
            artist: params[:artist], 
