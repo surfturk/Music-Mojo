@@ -1,11 +1,19 @@
 <div style = "font-family: Lobster, cursive">
-<h1>Create a new playlist here!</h1>
-
-<form action='/playlists/new' method="POST">
-  Playlist Name: <input type=text name="playlist_name">
-  Genre: <input type=text name="genre">
-  Artist: <input type=text name="artist">
-  Song: <input type=text name="song">
-  <input type=submit>
-</form>
+ <h1>Create a new playlist here!</h1>
+ <br>
+ <form action='/playlists/new' method="POST">
+   Playlist Name: <input type=text name="playlist_name" required>
+   <br>
+   <br>
+   Genre: <input type=text name="genre" required>
+   <br>
+   <br>
+   Artist: <input type=text name="artist" required>
+   <br>
+   <br>
+   Song: <input type=text name="song" required>
+   <br>
+   <br>
+   <input type=submit>
+ </form>
 </div>
