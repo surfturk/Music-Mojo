@@ -34,7 +34,7 @@ class PlaylistController < ApplicationController
        
   get '/playlists/:id/edit' do
     check_login
-    if current_user
+    if current_user == playlist.user_id
     @playlist = Playlist.find_by(id:params[:id])
       erb :'/playlists/edit'
     else
@@ -43,6 +43,7 @@ class PlaylistController < ApplicationController
   end 
        
   patch '/playlists/:id' do
+    
     @playlist = Playlist.find_by(id:params[:id])
       @playlist.update(
       playlist_name: params[:playlist_name], 
