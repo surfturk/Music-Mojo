@@ -1,3 +1,11 @@
+<div>
+ <p style = "color:red">
+ <% if flash.has?(:message) %>
+  <%= flash[:message] %>
+ <% end %>
+ </p>
+</div>
+
 <div style = "font-family: Lobster, cursive">
  <h1>Edit playlist here!</h1>
 
@@ -5,16 +13,16 @@
   
   <br>
   <input id="hidden" type="hidden"name="_method" value="patch">
-  Playlist Name: <input type=text value="<%=@playlist.playlist_name%>" name="playlist_name" id="playlist_name" required >
+  Playlist Name: <input type=text value="<%=@playlist.playlist_name%>" name="playlist_name" id="playlist_name">
   <br>
   <br>
-  Genre: <input type=text value="<%=@playlist.genre%>" name="genre" id="genre" required>
+  Genre: <input type=text value="<%=@playlist.genre%>" name="genre" id="genre">
   <br>
   <br>
-  Artist: <input type=text value="<%=@playlist.artist%>" name="artist" id="artist" required>
+  Artist: <input type=text value="<%=@playlist.artist%>" name="artist" id="artist">
   <br>
   <br>
-  Song: <input type=text value="<%=@playlist.song%>" name="song" id="song" required>
+  Song: <input type=text value="<%=@playlist.song%>" name="song" id="song">
   <br>
   <br>
   <input type=submit>
