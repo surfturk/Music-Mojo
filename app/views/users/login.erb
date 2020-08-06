@@ -1,9 +1,19 @@
+
+
 <div class="login" style = "font-family: Lobster, cursive">
  <h1>Login Here!</h1>
 
+ <div>
+ <p style = "color:red">
+ <% if flash.has?(:message) %>
+  <%= flash[:message] %>
+ <% end %>
+ </p>
+</div>
+
  <form action='/users/login' method="POST">
-    Username: <input type=text name="username" required>
-    Password: <input type=password name="password" required>
+    Username: <input type=text name="username">
+    Password: <input type=password name="password">
     <input type=submit>
   </form>
 

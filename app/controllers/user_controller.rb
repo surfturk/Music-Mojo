@@ -6,21 +6,22 @@ class UserController < ApplicationController
   end
 
   post '/users/signup' do 
-    if @user = User.create.valid?(
-      username: params[:username],
-      password: params[:password]
-         )
-      session[:user_id] = @user.id
-      erb :"/users/show"
-    else
-      redirect to :"/error"
-    end
+    @user = User.create(
+    username: params[:username],
+    password: params[:password]
+       )
+    session[:user_id] = @user.id
+     if @user.save
+       erb :"/users/show"
+     else
+       redirect to :"/error"
+     end
   end 
 
 
   get '/users/login' do
     if logged_in? 
-       redirect :"/playlists"
+       redirect to :"/playlists"
     else
        erb :"/users/login"
     end
@@ -33,6 +34,9 @@ class UserController < ApplicationController
        session[:user_id] = @user.id
        @session = session
        erb :"/users/show"
+    else
+      flash[:message] = "Spaces left blank!!"
+      erb :"users/login"  
     end
   end
 
