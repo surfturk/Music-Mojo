@@ -6,15 +6,14 @@ class UserController < ApplicationController
   end
 
   post '/users/signup' do 
-    @user = User.find_by(username: params[:username])
-     if @user && @user.authenticate(params[:password])
-      redirect to :"/error"
-     else @user = User.create!(
+    if @user = User.create.valid?(
       username: params[:username],
       password: params[:password]
          )
       session[:user_id] = @user.id
       erb :"/users/show"
+    else
+      redirect to :"/error"
     end
   end 
 
@@ -28,7 +27,7 @@ class UserController < ApplicationController
   end
   
 
- post '/users/login' do
+  post '/users/login' do
     @user = User.find_by(username: params[:username])
     if @user && @user.authenticate(params[:password])
        session[:user_id] = @user.id

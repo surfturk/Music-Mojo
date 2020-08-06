@@ -17,6 +17,10 @@ class ApplicationController < Sinatra::Base
     erb :'error'
   end
 
+  get "/general_error" do
+    erb :'general_error'
+  end
+
   helpers do
     def logged_in?
 			!!current_user
